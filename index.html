@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>华体会 · 使用向导</title>
+  <style>
+    /* base reset & font */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f4f9fc;
+      color: #1f2a33;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 840px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 36px 36px 24px 24px;
+      box-shadow: 0 12px 28px rgba(0, 30, 30, 0.08);
+      padding: 2.5rem 2rem;
+    }
+
+    /* header tagline */
+    .site-tag {
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #3a8a8a;
+      background: #e0f2f1;
+      display: inline-block;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      margin-bottom: 1.2rem;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      color: #134e4a;
+    }
+
+    .lead {
+      font-size: 1.1rem;
+      color: #2d5a5a;
+      border-left: 4px solid #2d9b9b;
+      padding-left: 1rem;
+      margin: 1.2rem 0 2rem 0;
+      font-weight: 400;
+    }
+
+    /* grid cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .card {
+      background: #f0f9f9;
+      padding: 1.5rem 1rem;
+      border-radius: 28px;
+      transition: all 0.15s ease;
+      border: 1px solid #d6ecec;
+    }
+    .card:hover {
+      background: #e3f2f2;
+      border-color: #248f8f;
+      transform: translateY(-2px);
+    }
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #0b4b4b;
+      margin-bottom: 0.3rem;
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: #2d5f5f;
+    }
+
+    /* content text */
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin: 2rem 0 0.8rem 0;
+      color: #1d4f4f;
+      border-bottom: 1px dashed #b8dddd;
+      padding-bottom: 0.3rem;
+    }
+
+    p {
+      margin-bottom: 1.2rem;
+      color: #1d2e33;
+    }
+
+    .inset-quote {
+      background: #e5f4f4;
+      border-radius: 20px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.8rem 0;
+      font-style: normal;
+      border-left: 5px solid #1f8f8f;
+      color: #114242;
+    }
+    .inset-quote::before {
+      content: "💡 提示 ";
+      font-weight: 600;
+      color: #0d6d6d;
+    }
+
+    .faq-summary {
+      margin: 2rem 0 1.5rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .faq-item {
+      background: #f7fcfc;
+      border-radius: 18px;
+      padding: 0.8rem 1.2rem;
+      flex: 1 1 200px;
+      border: 1px solid #ceebeb;
+    }
+    .faq-item strong {
+      display: block;
+      color: #0a5656;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+    .faq-item span {
+      font-size: 0.9rem;
+      color: #346161;
+    }
+
+    a {
+      color: #157f7f;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: #a8d5d5;
+      font-weight: 500;
+    }
+    a:hover {
+      color: #0a4f4f;
+      text-decoration-color: #0e6b6b;
+    }
+
+    .visit-note {
+      background: #ffffff;
+      border-radius: 40px;
+      border: 1px solid #b4dbdb;
+      padding: 1rem 1.8rem;
+      display: inline-block;
+      margin: 1.2rem 0;
+      font-size: 0.95rem;
+      color: #205454;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #d5ebeb;
+      margin: 2.5rem 0 1rem 0;
+    }
+
+    .footer-meta {
+      font-size: 0.85rem;
+      color: #4b7a7a;
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+
+    /* mobile polish */
+    @media (max-width: 520px) {
+      body { padding: 1rem 0.5rem; }
+      .container { padding: 1.5rem 1rem; }
+      h1 { font-size: 1.8rem; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="site-tag">识别向导 · 一站了解</div>
+
+  <h1>快速识别「华体会」：用途与定位</h1>
+
+  <div class="lead">
+    如果你第一次看到「华体会」这个名字，不确定它是什么、用来做什么，这篇简洁的说明可以帮你理清头绪。
+  </div>
+
+  <!-- 卡片：四个关键属性 -->
+  <div class="card-grid">
+    <div class="card">
+      <h3>🔍 综合平台</h3>
+      <p>涵盖体育、娱乐、互动内容，面向日常休闲场景。</p>
+    </div>
+    <div class="card">
+      <h3>🌐 数字服务</h3>
+      <p>以在线方式提供资讯、社区和功能入口，便于快速触达。</p>
+    </div>
+    <div class="card">
+      <h3>🧭 品牌名称</h3>
+      <p>「华体会」是运营主体的核心标识，风格简洁、易记。</p>
+    </div>
+    <div class="card">
+      <h3>📱 多端适配</h3>
+      <p>页面设计兼顾桌面与移动设备，保持基础体验一致。</p>
+    </div>
+  </div>
+
+  <!-- 正文：从用户视角展开 -->
+  <p>
+    当你打开一个网站，最直接的需求往往是：<strong>这个站点提供什么？我能不能快速用起来？</strong>「华体会」正是围绕这种直觉来组织内容——首页不会堆砌复杂术语，而是把主要服务类别、导航逻辑放在一目了然的位置。
+  </p>
+
+  <p>
+    从实际交互看，你可以把它理解为一个信息聚合与轻量互动的<strong>服务窗口</strong>。无论你原本关注的是体育赛事、休闲娱乐，还是希望找到实时资讯，站内都设有对应的模块。每一个模块都保持相对独立，同时又共享统一的账户体系，这样你无需反复登录或跳转。
+  </p>
+
+  <div class="inset-quote">
+    如果你习惯先看功能再决定是否深入了解，不妨直接浏览站内的分类入口——大部分场景都可以在首页找到对应的卡片或菜单项。
+  </div>
+
+  <h2>适合哪些场景？</h2>
+  <p>
+    <strong>日常浏览与轻度参与</strong>：比如快速查看比分、活动排行或热门内容。界面强调加载速度和低干扰，让你能用较短时间获取信息。<br>
+    <strong>社区交流</strong>：部分板块支持用户留言或互动，适合希望分享观点、寻找同好的场景。<br>
+    <strong>品牌了解</strong>：对「华体会」本身好奇的新访客，可以通过“关于”或常见问题区域获得更具体的说明。
+  </p>
+
+  <!-- FAQ 摘要卡片 -->
+  <h2>常见疑问摘要</h2>
+  <div class="faq-summary">
+    <div class="faq-item">
+      <strong>需要注册才能使用吗？</strong>
+      <span>部分浏览功能开放，参与特定互动需要简单注册。</span>
+    </div>
+    <div class="faq-item">
+      <strong>移动端体验如何？</strong>
+      <span>页面已做响应式适配，微信浏览器及 Safari 均可正常使用。</span>
+    </div>
+    <div class="faq-item">
+      <strong>内容更新频率？</strong>
+      <span>核心板块保持每日刷新，活动类按周期更新。</span>
+    </div>
+  </div>
+
+  <!-- 嵌入链接的自然句子 -->
+  <p>
+    如果你希望进一步确认网站的实际面貌，可以直接访问 <a href="https://sitecn-hth.com.cn">华体会</a> 首页，大致浏览栏目分布与视觉风格。多数人进入后首先关注顶部导航与中央推荐区——那里通常集中了当前最活跃的内容。
+  </p>
+
+  <p>
+    另外，如果你是回头访客，也可能注意到首页会根据时段微调推荐顺序，但整体结构保持稳定，不会带来额外的认知负担。
+  </p>
+
+  <!-- 第二个引用提示，自然嵌入链接 -->
+  <div class="inset-quote">
+    最后一点提醒：如果你是通过朋友推荐或社交媒体了解到 <a href="https://sitecn-hth.com.cn">华体会</a>，建议先从“热门动态”或“今日看点”入手，这部分内容通常最能反映平台的当前调性。
+  </div>
+
+  <hr>
+
+  <div class="visit-note">
+    📌 本页为独立介绍，不替代站内官方说明。功能细节请以实际页面为准。
+  </div>
+
+  <div class="footer-meta">
+    基于公开信息整理 · 用于快速识别
+  </div>
+
+</div>
+</body>
+</html>
