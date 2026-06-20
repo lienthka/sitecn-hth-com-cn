@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jiuyou · 一处安静的站点说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7fafc;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1e293b;
+            line-height: 1.7;
+            padding: 2.4rem 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* 网格卡片背景装饰 */
+        .backdrop-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(20, 168, 158, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(20, 168, 158, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 文章卡片 */
+        .post-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2rem 1.8rem;
+            box-shadow: 0 8px 20px -6px rgba(0, 50, 40, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(20, 168, 158, 0.12);
+            backdrop-filter: blur(2px);
+        }
+
+        /* 标题区 */
+        .article-header {
+            margin-bottom: 1.8rem;
+            border-bottom: 1px dashed #d6e4e0;
+            padding-bottom: 1.2rem;
+        }
+
+        .article-header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #0f2c2a;
+            margin-bottom: 0.4rem;
+        }
+
+        .article-header .subhead {
+            font-size: 1rem;
+            color: #5d7370;
+            border-left: 4px solid #14a89e;
+            padding-left: 1rem;
+            margin-top: 0.2rem;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.6rem;
+            font-size: 0.85rem;
+            color: #6b8180;
+            margin-top: 0.6rem;
+        }
+
+        .article-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .article-meta span::before {
+            content: "•";
+            color: #14a89e;
+            font-weight: bold;
+            margin-right: 0.2rem;
+        }
+
+        /* 正文段落 */
+        .post-body p {
+            margin-bottom: 1.4rem;
+            font-size: 1rem;
+            color: #1f3a36;
+        }
+
+        .post-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .post-body a {
+            color: #0f766e;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid rgba(20, 168, 158, 0.25);
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .post-body a:hover {
+            color: #0b4f4a;
+            border-bottom-color: #14a89e;
+        }
+
+        /* 引用块 / 提示 */
+        .callout {
+            background: #e8f3f0;
+            border-radius: 18px;
+            padding: 1.2rem 1.6rem;
+            margin: 1.8rem 0;
+            border-left: 6px solid #14a89e;
+            font-size: 0.95rem;
+            color: #1b3f3b;
+            box-shadow: 0 2px 8px rgba(0, 50, 40, 0.04);
+        }
+
+        .callout strong {
+            color: #0b554f;
+        }
+
+        .callout::before {
+            content: "💬 提示";
+            display: block;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.3px;
+            color: #0f766e;
+            margin-bottom: 0.4rem;
+        }
+
+        /* 简洁卡片网格 (特点) */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.8rem 0;
+        }
+
+        .feature-item {
+            background: #f2f9f7;
+            border-radius: 18px;
+            padding: 1rem 1rem 1rem 1.2rem;
+            border: 1px solid #d5e7e2;
+            transition: background 0.2s;
+        }
+
+        .feature-item:hover {
+            background: #e6f4ef;
+        }
+
+        .feature-item .emoji-badge {
+            display: inline-block;
+            background: #14a89e;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 28px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #113e39;
+            margin-bottom: 0.2rem;
+        }
+
+        .feature-item p {
+            font-size: 0.88rem;
+            color: #3b5e59;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        /* FAQ 摘要 */
+        .faq-mini {
+            background: #f9fdfc;
+            border-radius: 18px;
+            padding: 1.2rem 1.4rem;
+            margin: 1.4rem 0 0.6rem;
+            border: 1px solid #d0e3de;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.8rem;
+            border-bottom: 1px dashed #dce9e5;
+            padding-bottom: 0.6rem;
+        }
+
+        .faq-mini details:last-child {
+            border-bottom: 0;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-mini summary {
+            font-weight: 600;
+            color: #0a5b54;
+            cursor: pointer;
+            font-size: 0.95rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .faq-mini summary::before {
+            content: "▸";
+            color: #14a89e;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .faq-mini details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .faq-mini .answer {
+            margin-top: 0.4rem;
+            padding-left: 1.3rem;
+            font-size: 0.9rem;
+            color: #2b544e;
+        }
+
+        /* 访问句子 */
+        .visit-line {
+            background: #ffffff;
+            border-radius: 40px;
+            padding: 1rem 1.6rem;
+            margin-top: 2rem;
+            text-align: center;
+            border: 1px solid #caded9;
+            box-shadow: 0 2px 6px rgba(0, 30, 20, 0.04);
+            font-size: 1rem;
+        }
+
+        .visit-line a {
+            color: #0f766e;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid #14a89e;
+        }
+
+        .visit-line a:hover {
+            color: #063d39;
+            border-bottom-color: #0b6b62;
+        }
+
+        /* 页脚 */
+        .footer-note {
+            margin-top: 2.2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #829b96;
+            border-top: 1px solid #ddebe7;
+            padding-top: 1.2rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .post-card {
+                padding: 1.4rem 1rem;
+                border-radius: 24px;
+            }
+            .article-header h1 {
+                font-size: 1.6rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            .feature-item {
+                padding: 0.9rem;
+            }
+            .callout {
+                padding: 1rem 1.2rem;
+            }
+            .faq-mini {
+                padding: 1rem;
+            }
+            .visit-line {
+                padding: 0.8rem 1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .article-header h1 {
+                font-size: 1.4rem;
+            }
+            .post-body p {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="backdrop-grid"></div>
+    <div class="page content">
+        <div class="post-card">
+            <!-- 文章头部 -->
+            <div class="article-header">
+                <h1>jiuyou · 站点与可信说明</h1>
+                <div class="subhead">一份关于内容定位与使用预期的温和介绍</div>
+                <div class="article-meta">
+                    <span>2025 · 春</span>
+                    <span>站点笔记</span>
+                    <span>简洁版</span>
+                </div>
+            </div>
+
+            <!-- 正文主体 -->
+            <div class="post-body">
+                <p>
+                    如果你偶然经过这里，大概会想了解 <strong>jiuyou</strong> 究竟是一个怎样的站点。它并非商业门户，也并非资讯瀑布流，而更像一个安静的角落——提供经过筛选的信息、工具或思考碎片。站点的维护者倾向于保持克制的表达，不追逐流量，也不做过分的承诺。下面从几个侧面展开说明。
+                </p>
+
+                <p>
+                    首先，关于内容的可信度。所有公开发布在 <a href="https://m-cn-jiuyou.com">jiuyou</a> 上的材料，均经过基本的核实与引用标注（如果有外部信息）。站点没有使用自动生成的模糊内容，也没有隐藏的推广链接。你可以把它当作一个普通的信息节点，依据自己的判断来取用。它并不代表权威，但力求诚实。
+                </p>
+
+                <!-- 引用提示 -->
+                <div class="callout">
+                    <strong>引用提示</strong>：如果你打算在别处引用 jiuyou 的内容，建议先对比原始来源或直接确认。站点不承担因间接引用而产生的误解责任。
+                </div>
+
+                <!-- 特点网格卡片 -->
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="emoji-badge">📄</div>
+                        <h3>非碎片化</h3>
+                        <p>每篇文章或页面都保持相对完整的语境，不依赖耸动标题。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="emoji-badge">🔒</div>
+                        <h3>无跟踪脚本</h3>
+                        <p>站点不部署第三方分析器，不收集个人浏览数据。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="emoji-badge">🧭</div>
+                        <h3>方向明确</h3>
+                        <p>内容围绕特定领域展开，不泛泛而谈，也不追逐热点。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="emoji-badge">🕊️</div>
+                        <h3>低干扰</h3>
+                        <p>没有弹窗、悬浮广告或强制注册，阅读体验平实。</p>
+                    </div>
+                </div>
+
+                <p>
+                    另一个常被问起的话题是：<strong>这个站点的更新频率如何？</strong> 答案是不固定。维护者更在意输出的质量而非数量，有时可能几周没有新内容，有时会连续补充几篇。如果你想保持关注，可以偶尔回来看看，或者通过站点上留下的方式（如果有）订阅。所有更新都会直接体现在首页或对应栏目中。
+                </p>
+
+                <p>
+                    最后，关于使用场景。无论你是偶然路过、寻找某个特定信息，还是对站点背后的思路感兴趣，都可以自由浏览。所有页面均对公众开放，无需登录。如果你觉得某些内容有偏差，也欢迎通过站内提供的联系方式（如果有）提出温和的指正——但请理解，站点不保证一定采纳所有建议。
+                </p>
+
+                <!-- FAQ 摘要 -->
+                <div class="faq-mini">
+                    <details>
+                        <summary>jiuyou 的内容可以转载吗？</summary>
+                        <div class="answer">
+                            可以，但请注明出处并保持原意。不建议断章取义或用于商业用途而不加说明。
+                        </div>
+                    </details>
+                    <details>
+                        <summary>站点是否接受投稿或合作？</summary>
+                        <div class="answer">
+                            目前没有开放投稿通道，未来也不一定有。合作仅限理念高度契合的少数情况，且不会涉及付费推广。
+                        </div>
+                    </details>
+                    <details>
+                        <summary>为什么叫 jiuyou ？</summary>
+                        <div class="answer">
+                            名称来源于一种个人化的意象，没有复杂的商业含义。你可以理解为“久有”或“九友”，但站点本身不赋予其特定解释。
+                        </div>
+                    </details>
+                </div>
+
+                <!-- 访问句 (嵌入链接) -->
+                <div class="visit-line">
+                    ✦ 如果你愿意，可以直接前往 <a href="https://m-cn-jiuyou.com">jiuyou</a> 浏览当前的全部内容 ✦
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <div class="footer-note">
+                jiuyou · 简洁说明 · 开放且克制
+            </div>
+        </div>
+    </div>
+</body>
+</html>
