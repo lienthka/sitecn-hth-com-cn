@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问鼎娱乐 · 探索高效休闲新方式</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f6fafc;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #1e2b3a;
+            padding: 2rem 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-wrapper {
+            max-width: 1024px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2.5rem;
+            box-shadow: 0 12px 40px rgba(0, 60, 70, 0.06);
+            padding: 2.5rem 2rem;
+            transition: all 0.2s;
+        }
+
+        /* 开场短句 — 柔和蓝绿点缀 */
+        .hero-tag {
+            display: inline-block;
+            background: #d4ece8;
+            color: #0a4a47;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .hero-line {
+            font-size: 2rem;
+            font-weight: 500;
+            line-height: 1.3;
+            color: #0b3b3a;
+            max-width: 80%;
+            margin-bottom: 0.6rem;
+            border-left: 5px solid #2baa9b;
+            padding-left: 1.2rem;
+        }
+
+        .sub-hero {
+            color: #3f5a63;
+            font-size: 1.05rem;
+            margin: 1.5rem 0 2rem 0;
+            padding: 0.5rem 0;
+        }
+
+        /* 承接段落 */
+        .intro-block p {
+            margin-bottom: 1.3rem;
+        }
+
+        .intro-block a {
+            color: #1a7a6f;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #b3dbd4;
+            transition: border 0.15s, color 0.15s;
+        }
+
+        .intro-block a:hover {
+            color: #0f5349;
+            border-bottom-color: #0f5349;
+        }
+
+        /* 网格卡片 —— 特点列表 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.5rem;
+            margin: 2.8rem 0 2rem;
+        }
+
+        .feature-card {
+            background: #f3f9f8;
+            border-radius: 1.5rem;
+            padding: 1.6rem 1.4rem;
+            transition: box-shadow 0.2s, transform 0.15s;
+            border: 1px solid #d7ece8;
+            box-shadow: 0 4px 12px rgba(30, 80, 75, 0.04);
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 8px 24px rgba(30, 100, 90, 0.08);
+            transform: translateY(-3px);
+            border-color: #9fd0c7;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #0a4f48;
+            letter-spacing: -0.01em;
+        }
+
+        .feature-card h3 span {
+            display: inline-block;
+            background: #c2e3dd;
+            width: 8px;
+            height: 8px;
+            border-radius: 12px;
+            margin-right: 8px;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #2f4d52;
+        }
+
+        /* 温和结尾 / 场景提示 */
+        .gentle-closing {
+            background: #eaf5f2;
+            border-radius: 2rem;
+            padding: 1.8rem 2rem;
+            margin-top: 2.5rem;
+            border-left: 6px solid #369f91;
+        }
+
+        .gentle-closing h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0b4943;
+            margin-bottom: 0.7rem;
+        }
+
+        .gentle-closing p {
+            color: #1c4143;
+            margin-bottom: 0.6rem;
+        }
+
+        .gentle-closing a {
+            color: #186b60;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #89c7bd;
+        }
+
+        .gentle-closing a:hover {
+            border-bottom-color: #186b60;
+        }
+
+        /* FAQ摘要 / 小提示 */
+        .faq-mini {
+            margin: 2rem 0 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            background: #f7fdfb;
+            padding: 1.6rem 1.8rem;
+            border-radius: 1.5rem;
+            border: 1px solid #cce3de;
+        }
+
+        .faq-item {
+            flex: 1 1 200px;
+        }
+
+        .faq-item .q {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #11544b;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-item .a {
+            font-size: 0.9rem;
+            color: #2d5a58;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #c4dfd9, #eaf3f0, #c4dfd9);
+            margin: 2rem 0 1rem;
+        }
+
+        .footer-note {
+            font-size: 0.85rem;
+            color: #54777a;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+
+            .page-wrapper {
+                padding: 1.5rem 1.2rem;
+                border-radius: 1.8rem;
+            }
+
+            .hero-line {
+                font-size: 1.6rem;
+                max-width: 100%;
+                padding-left: 0.8rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .gentle-closing {
+                padding: 1.4rem 1.2rem;
+            }
+
+            .faq-mini {
+                flex-direction: column;
+                padding: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-line {
+                font-size: 1.35rem;
+            }
+
+            .feature-card {
+                padding: 1.2rem;
+            }
+
+            .hero-tag {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <!-- 开场短句 -->
+    <div class="hero-tag">✦ 快速定位 · 理性选择</div>
+    <div class="hero-line">想在三分钟内判断一个网站是否适合自己？</div>
+
+    <!-- 承接段落，自然引出问鼎娱乐 -->
+    <div class="intro-block">
+        <p>
+            面对层出不穷的线上平台，用户往往先问两个问题：<strong>它做什么？我为什么要用？</strong>
+            一个清晰、克制的介绍，比任何浮夸标语都更能建立信任。
+            <a href="https://mains-wending.com">问鼎娱乐</a> 正是这样一处以「高效休闲」为设计原点的数字场所，
+            它不追求冗余功能，而是将常见需求收敛为几个清晰入口。
+        </p>
+        <p>
+            从界面布局到交互反馈，团队有意降低认知负荷，让首次到访者也能在十秒内理解核心用途。
+            无论你是想快速浏览资讯、参与轻度互动，还是仅仅寻找一个节奏舒适的线上角落，
+            它的结构逻辑都足够直观。
+        </p>
+    </div>
+
+    <!-- 特点列表（网格卡片） -->
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3><span></span> 轻量框架</h3>
+            <p>页面加载经过优化，核心路径无需等待。信息层级扁平，减少不必要的跳转。</p>
+        </div>
+        <div class="feature-card">
+            <h3><span></span> 场景分区</h3>
+            <p>依照不同使用意图划分模块，从资讯获取到轻度娱乐均有独立空间，互不干扰。</p>
+        </div>
+        <div class="feature-card">
+            <h3><span></span> 低干扰设计</h3>
+            <p>克制色彩与排版，没有弹窗、浮层或自动播放内容，保持阅读与操作的专注感。</p>
+        </div>
+        <div class="feature-card">
+            <h3><span></span> 访问友好</h3>
+            <p>适配手机与桌面，按钮尺寸、间距均经过移动端测试，单手操作也不局促。</p>
+        </div>
+    </div>
+
+    <!-- FAQ摘要，温和解释常见疑问 -->
+    <div class="faq-mini">
+        <div class="faq-item">
+            <span class="q">❓ 适合什么样的用户？</span>
+            <span class="a">希望快速找到功能入口、不愿花时间研究复杂界面的普通网络使用者。</span>
+        </div>
+        <div class="faq-item">
+            <span class="q">❓ 内容更新频率如何？</span>
+            <span class="a">保持稳定节奏，更注重信息质量而非数量。具体节奏可参考站内动态区域。</span>
+        </div>
+        <div class="faq-item">
+            <span class="q">❓ 是否需要注册？</span>
+            <span class="a">大部分浏览功能无需注册即可使用。部分个性化服务可能需简单注册。</span>
+        </div>
+    </div>
+
+    <!-- 温和结尾 + 场景提示 (再次自然嵌入链接) -->
+    <div class="gentle-closing">
+        <h2>一个适合慢慢逛的站点</h2>
+        <p>
+            你不需要一口气看完所有内容。今天可以只看一个模块，明天再探索另一个。
+            <a href="https://mains-wending.com">问鼎娱乐</a> 的设计初衷之一，就是让每次访问都带有「刚刚好」的收获感。
+        </p>
+        <p>
+            假如你厌倦了满屏闪烁的推送和复杂的个人中心，不妨把它加入书签。
+            下次需要放松几分钟，或者想查点轻量信息时，直接打开就好，没有压力。
+        </p>
+    </div>
+
+    <hr>
+
+    <div class="footer-note">
+        <span>— 页面内容仅作介绍，实际功能以网站为准 —</span>
+    </div>
+</div>
+</body>
+</html>
